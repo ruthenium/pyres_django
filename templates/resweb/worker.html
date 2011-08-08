@@ -1,0 +1,40 @@
+{% extends 'resweb/overview.html' %}
+
+{% block main %}
+{% if worker %}
+<h1>Worker {{ worker }}</h1>
+  <table class='workers'>
+    <tr>
+      <th>&nbsp;</th>
+      <th>Host</th>
+      <th>Pid</th>
+      <th>Started</th>
+      <th>Queues</th>
+      <th>Processed</th>
+      <th>Failed</th>
+      <th>Processing</th>
+    </tr>
+    <tr>
+      <td class='icon'><img src="{{ STATIC_URL }}resweb/{{ worker.state }}.png" alt="{{ worker.state }}" title="{{ worker.state }}"></td>
+      <td>{{ worker.host }}</td>
+      <td>{{ worker.pid }}</td>
+      <td><span class="time">{{ worker.started }}</a></td>
+      <td class='queues'>
+      {% for q in worker.queues %}
+      <a class="queue-tag" href="{% url resweb-queue q %}">{{ q }}</a>&nbsp;
+      {% endfor %}
+      </td>
+      <td>{{ worker.get_processed }}</td>
+      <td>{{ worker.get_failed }}</td>
+      <td class='process'>
+          {% if worker.data %}
+          <code>{{ worker.code }}</code>
+          <small><a class="queue time" href="{% url working worker %}">{{ worker.runat }}</a></small>
+          {% else %}
+          <span class='waiting'>Waiting for a job...</span>
+          {% endif %}
+      </td>
+    </tr>
+</table>
+{% endif %}
+{% endblock %}

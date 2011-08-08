@@ -1,0 +1,11 @@
+{% if key == 'resque' %}
+Pyres
+{% else %}
+{% if key == 'redis' %}
+{{ address }}
+{% else %}
+{% if key == 'keys' %}
+Keys owned by Pyres
+{% endif %} {# keys #}
+{% endif %} {# redis #}
+{% endif %} {# resque #}

@@ -1,0 +1,35 @@
+{% extends 'resweb/base.html' %}
+
+{% block sub_nav %}
+{% for q in queues %}
+<li><a href="{% url resweb-queue q.q %}">{{ q.q }}</a></li>
+{% endfor %}
+{% endblock %}
+
+{% block main %}
+
+<h1>Pending jobs on <span class='hl'>{{ queue }}</span></h1>
+<form method="post" action="{% url resweb-queue-delete queue %}" class='remove-queue'>{% csrf_token %}
+    <input type='submit' name='' value='Remove Queue' onclick='return confirm("Are you absolutely sure? This cannot be undone.");' />
+ </form>
+  <p class='sub'>Showing {{ start }} to {{ end }} of <b>{{ size }}</b> jobs</p>
+  {% include 'resweb/pagination.html' %}
+
+  <table class='jobs'>
+    <tr>
+      <th>Class</th>
+      <th>Args</th>
+  </tr> 
+  {% for job in jobs %}
+  <tr>
+      <td class='class'>{{ job.class }}</td>
+      <td class='args'>{{ job.args }}</td>
+  </tr>
+  {% empty %}
+  <tr>
+      <td class='no-data' colspan='2'>There are no pending jobs in this queue.</td>
+  </tr>
+  {% endfor %}
+  </table>
+
+{% endblock %}

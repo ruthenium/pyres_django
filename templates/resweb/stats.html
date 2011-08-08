@@ -1,0 +1,47 @@
+{% extends 'resweb/base.html' %}
+
+{% block sub_nav %}
+<li><a href="{% url resweb-stats-key 'resque' %}"><span>resque</span></a></li>
+<li><a href="{% url resweb-stats-key 'redis' %}"><span>redis</span></a></li>
+<li><a href="{% url resweb-stats-key 'keys' %}"><span>keys</span></a></li>
+{% endblock %}
+
+{% block main %}
+
+{#<h1>{% include 'resweb/stat_title.html' %}</h1>#}
+<h1>{{ key_title }}</h1>
+{% if key != 'keys' %}
+  <table class='stats'>
+  {% for stat in stats %}
+    <tr>
+      <th>
+        {{ stat.key }}
+      </th>
+      <td>
+        {{ stat.value }}
+      </td>
+    </tr>
+  {% endfor %}
+  </table>
+{% else %}
+<p class='sub'>(All keys are actually prefixed with "resque:")</p>
+    <table class='stats'>
+    <tr>
+        <th>key</th>
+        <th>type</th>
+        <th>size</th>
+    </tr>
+    {% for stat in stats %}
+    <tr>
+        <th>
+        <a href="{% url resweb-stat stat.key %}">{{ stat.key }}</a>
+        </th>
+        <td>{{ stat.type }}</td>
+        <td>{{ stat.size }}</td>
+    </tr>
+  {% endfor %}
+  </table>
+{% endif %}
+
+
+{% endblock %}
