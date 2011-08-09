@@ -1,7 +1,0 @@
-<ul class="pagination">
-    {% for p in page_range %}
-    <li>
-    {% if p.current %}{{ p.index }}{% else %}<a href="?start={{ p.start }}">{{ p.index }}</a>{% endif %}
-    </li>
-    {% endfor %}
-</ul>
