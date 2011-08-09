@@ -13,8 +13,10 @@ Basically, this is just a set of my own shortcuts moved to a separate django app
 ## INSTALLATION
 
  1. Ensure that Pyres is installed and working.
- 2. Add 'pyres_django' to your INSTALLED_APPS
- 3. If needed, set the REDIS_HOST and REDIS_PORT config settings.
+ 2. Checkout the app code to your project path:
+    ```git clone git://github.com/ruthenium/pyres_django.git```
+ 3. Add 'pyres_django' to your INSTALLED_APPS.
+ 4. If needed, set the REDIS_HOST and REDIS_PORT config settings.
 
 And that's it! Now everything should work.
 
@@ -28,10 +30,13 @@ And that's it! Now everything should work.
 
 ### Adding job to a queue:
 
-Anywhere in your code just do:
+Import the get_pyres helper:
 
-```from pyres_django import get_pyres
-get_pyres().enqueue(SomeJob, *some_args)```
+```from pyres_django import get_pyres```
+
+Then anywhere in your code just do:
+
+```get_pyres().enqueue(SomeJob, *some_args)```
 
 ### Starting pyres worker:
 
@@ -44,11 +49,9 @@ If you would like to permanently define a queues list for it, you can set the PY
 
 ### Web Interface:
 
-In your global urls.py just add the following:
+Include pyres_django's urls.py as you usually do in your global urls.py:
 
-```urlpatterns = patterns('',
-   url('^my-prefix', include('pyres_django.urls')),
-)```
+```urlpatterns = patterns('', url('^my-prefix', include('pyres_django.urls')), )```
 
 And now it will be available under your specified prefix.
 
