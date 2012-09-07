@@ -209,7 +209,7 @@ class Queue(ReswebView, QueuesMixin):
     _paginated = True
 
     def jobs(self):
-        return [WebContainer(cls=j['class'], args=','.join(j['args'])) for j in
+        return [WebContainer(cls=j['class'], args=','.join([''.join(str(x)) for x in j['args']])) for j in
                 self.resq.peek(self.queue(), self._start, self._end)]
 
     def size(self):

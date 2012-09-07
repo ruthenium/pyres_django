@@ -2,7 +2,7 @@ from django.conf.urls.defaults import patterns, include, url
 from django.shortcuts import redirect
 
 urlpatterns = patterns('pyres_django.views',
-    url(r'^/$', 'overview', name='resweb-index'),
+    url(r'^$', 'overview', name='resweb-index'),
 
     url(r'^working/$', 'working', name='resweb-working'),
 

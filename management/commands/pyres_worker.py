@@ -54,7 +54,7 @@ class Command(NoArgsCommand):
 
         log_level = getattr(logging, options.get('log_level').upper(),
                 'INFO')
-        setup_logging(log_level=log_level,
+        setup_logging("pyres", log_level=log_level,
                 filename=options.get('log_file'))
 
         Worker.run(queues, server, interval)
