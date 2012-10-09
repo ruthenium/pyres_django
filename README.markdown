@@ -51,7 +51,7 @@ If you would like to permanently define a queues list for it, you can set the PY
 
 Include pyres_django's urls.py as you usually do in your global urls.py:
 
-```urlpatterns = patterns('', url('^my-prefix', include('pyres_django.urls')), )```
+```urlpatterns = patterns('', url('^my-prefix/', include('pyres_django.urls')), )```
 
 And now it will be available under your specified prefix.
 
