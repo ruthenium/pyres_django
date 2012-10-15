@@ -40,7 +40,7 @@ Adding this will autodiscover all periodic jobs to be executed.
 
 ### Adding a periodic job to a queue:
 
-Create a `tasks.py` file inside your app folder. Add a class strating with `Periodic`, add a `perform()` function and a __queue__ attribute as stated in [pyres](http://itybits.com/pyres/example.html). You should also add a `run every` for adding cron-like functionality as described in [APScheduler](http://packages.python.org/APScheduler/cronschedule.html).
+Create a `tasks.py` file inside your app folder. Add a class strating with `Periodic` or Interval, add a `perform()` function and a __queue__ attribute as stated in [pyres](http://itybits.com/pyres/example.html). You should also add a `run every` for adding cron-like functionality as described in [APScheduler](http://packages.python.org/APScheduler/cronschedule.html).
 Lets take an example.
 
     class IntervalMyJob(object):
@@ -76,7 +76,7 @@ Then anywhere in your code just do:
 
 Just type into your console:
 
-```$ QUEUES=q1,q2 python2 manage.py pyres_worker```
+```$ QUEUES=q1,q2,high python2 manage.py pyres_worker```
 
 And worker should run.
 If you would like to permanently define a queues list for it, you can set the PYRES_QUEUES variable in your settings.py.
