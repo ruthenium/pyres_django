@@ -25,10 +25,44 @@ And that's it! Now everything should work.
  1. [Redis](http://redis.io/) server.
  2. [Pyres](https://github.com/binarydud/pyres) and its dependencies.
  3. [Django](https://www.djangoproject.com/) 1.3 or higher (because of class-based views in the web ui).
+ 4. [Pyres-Scheduler](https://github.com/c-oreills/pyres-scheduler) 2.0.3
 
 ## USAGE
 
 ### Adding job to a queue:
+
+In your `urls.py` add:
+
+    import pyres_django
+    pyres_django.autodiscover()
+
+Adding this will autodiscover all periodic jobs to be executed.
+
+### Adding a periodic job to a queue:
+
+Create a `tasks.py` file inside your app folder. Add a class strating with `Periodic` or Interval, add a `perform()` function and a __queue__ attribute as stated in [pyres](http://itybits.com/pyres/example.html). You should also add a `run every` for adding cron-like functionality as described in [APScheduler](http://packages.python.org/APScheduler/cronschedule.html).
+Lets take an example.
+
+    class IntervalMyJob(object):
+        queue = "high"
+        run_every = {'second': 2}
+
+        @staticmethod
+        def perform(args):
+            print 'This will be seen every 2 seconds: %s' % args
+
+and 
+
+    class PeriodicMyJob(object):
+        queue = "high"
+        # Schedule a backup to run once from Monday to Friday at 5:30 (am)
+        run_every = {'month': '6-8,11-12', 'day': '3rd fri', 'hour': '0-3'}
+
+        @staticmethod
+        def perform():
+            print 'This will be seen every once from Monday to Friday at 5:30 (am)'
+
+### Adding a one time job to a queue:
 
 Import the get_pyres helper:
 
@@ -42,7 +76,7 @@ Then anywhere in your code just do:
 
 Just type into your console:
 
-```$ QUEUES=q1,q2 python2 manage.py pyres_worker```
+```$ QUEUES=q1,q2,high python2 manage.py pyres_worker```
 
 And worker should run.
 If you would like to permanently define a queues list for it, you can set the PYRES_QUEUES variable in your settings.py.
@@ -69,3 +103,4 @@ Although, the basic implementation of a "True-way" wsgi integration can be found
  * [binarydud](https://github.com/binarydud/) - an author of original pyres and resweb.
  * [alex](https://github.com/alex) - an author of the [django-wsgi](https://github.com/alex/django-wsgi)
  * [2degrees](https://github.com/2degrees) - the authors of the [twod.wsgi](https://github.com/2degrees/twod.wsgi)
+ * [https://github.com/c-oreills](https://github.com/c-oreills) - the author of the [pyres-scheduler](https://github.com/c-oreills/pyres-scheduler)
