@@ -103,4 +103,6 @@ Although, the basic implementation of a "True-way" wsgi integration can be found
  * [binarydud](https://github.com/binarydud/) - an author of original pyres and resweb.
  * [alex](https://github.com/alex) - an author of the [django-wsgi](https://github.com/alex/django-wsgi)
  * [2degrees](https://github.com/2degrees) - the authors of the [twod.wsgi](https://github.com/2degrees/twod.wsgi)
- * [https://github.com/c-oreills](https://github.com/c-oreills) - the author of the [pyres-scheduler](https://github.com/c-oreills/pyres-scheduler)
+ * [c-oreills](https://github.com/c-oreills) - the author of the [pyres-scheduler](https://github.com/c-oreills/pyres-scheduler)
+ * [mzupan](https://github.com/mzupan)
+ * [geros](https://github.com/geros)
